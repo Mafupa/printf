@@ -17,16 +17,17 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] != '%' || (format[i] == '%' && format[i + 1] == '%'))
+		if (format[i] != '%')
 		{
 			write(1, &format[i], 1);
 			i++;
 			char_printed++;
-			continue;
 		}
-		handle_functions(format[i + 1], args, &char_printed, &i);
-		i += 2;
-		char_printed++;
+		else
+		{
+			handle_functions(format[i + 1], args, &char_printed);
+			i += 2;
+		}
 	}
 	va_end(args);
 	return (char_printed);

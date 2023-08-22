@@ -102,7 +102,7 @@ void dectobase(unsigned int n, unsigned int d, int maj, int *cp)
  * handle_functions - handle the functions
  * @format
  */
-void handle_functions(char c, va_list args, int *char_printed, int *i)
+void handle_functions(char c, va_list args, int *char_printed)
 {
 	char temp_c;
 
@@ -111,9 +111,14 @@ void handle_functions(char c, va_list args, int *char_printed, int *i)
 		case 'c':
 			temp_c = va_arg(args, int);
 			write(1, &temp_c, 1);
+			(*char_printed)++;
 			break;
 		case 's':
 			char_printed += print_string(va_arg(args, char *));
+			break;
+		case '%':
+			write(1, "%%", 2);
+			(*char_printed)++;
 			break;
 		case 'd':
 		case 'i':
@@ -136,6 +141,8 @@ void handle_functions(char c, va_list args, int *char_printed, int *i)
 			dectobase(va_arg(args, int), 16, 1, char_printed);
 			break;
 		default:
-			(*i)--;
+			write(1, "%", 1);
+			write(1, &c, 1);
+			(*char_printed) += 2;
 	}
 }
