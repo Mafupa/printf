@@ -100,7 +100,9 @@ void dectobase(unsigned int n, unsigned int d, int maj, int *cp)
 
 /**
  * handle_functions - handle the functions
- * @format
+ * @c: character for function
+ * @args: arguments
+ * @char_printed: char printed counter
  */
 void handle_functions(char c, va_list args, int *char_printed)
 {
@@ -127,7 +129,6 @@ void handle_functions(char c, va_list args, int *char_printed)
 		case 'u':
 			print_unsigned(va_arg(args, unsigned int), char_printed);
 			break;
-
 		case 'b':
 			dectobase(va_arg(args, int), 2, 0, char_printed);
 			break;
