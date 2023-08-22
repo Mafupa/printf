@@ -96,6 +96,26 @@ void dectobase(unsigned int n, unsigned int d, int maj, int *cp)
 }
 
 /**
+ * write_to_buffer - writes to buffers
+ * @c: charcter
+ * @buffer: pointer to buffer
+ * @i: pointer to index
+ */
+void write_to_buffer(char c, char *buffer, int *i)
+{
+	if (*i < 1024)
+	{
+		buffer[*i] = c;
+	}
+	else
+	{
+		write(1, buffer, 1024);
+		*i = 0;
+		buffer[*i] = c;
+	}
+}
+
+/**
  * _printf - prints
  * @format: format of the string to print
  * Return: the number of characters printed
