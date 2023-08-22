@@ -119,7 +119,7 @@ void handle_functions(char c, va_list args, int *char_printed)
 			char_printed += print_string(va_arg(args, char *));
 			break;
 		case '%':
-			write(1, "%%", 2);
+			write(1, "%", 1);
 			(*char_printed)++;
 			break;
 		case 'd':
