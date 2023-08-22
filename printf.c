@@ -95,25 +95,6 @@ void dectobase(unsigned int n, unsigned int d, int maj, int *cp)
 	}
 }
 
-/**
- * write_to_buffer - writes to buffers
- * @c: charcter
- * @buffer: pointer to buffer
- * @i: pointer to index
- */
-void write_to_buffer(char c, char *buffer, int *i)
-{
-	if (*i < 1024)
-	{
-		buffer[*i] = c;
-	}
-	else
-	{
-		write(1, buffer, 1024);
-		*i = 0;
-		buffer[*i] = c;
-	}
-}
 
 /**
  * _printf - prints
@@ -123,7 +104,6 @@ void write_to_buffer(char c, char *buffer, int *i)
 int _printf(const char *format, ...)
 {
 	int i = 0, arg_used = 0, char_printed = 0;
-	/* char buffer[1024]; */
 	char temp_c;
 	va_list args;
 
@@ -147,8 +127,6 @@ int _printf(const char *format, ...)
 			char_printed += print_string(va_arg(args, char *));
 			break;
 		case 'd':
-			print_number(va_arg(args, int), &char_printed);
-			break;
 		case 'i':
 			print_number(va_arg(args, int), &char_printed);
 			break;
